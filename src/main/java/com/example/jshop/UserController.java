@@ -31,9 +31,8 @@ public class UserController {
 
     // update: PATCH /users/{userId}
     @PatchMapping("/{userId}")
-    public String updatebyId(@PathVariable String userId) {
+    public String updateById(@PathVariable String userId) {
         return userId + " UPDATED";
-
     }
 
     // delete: DELETE /users/{userId}
