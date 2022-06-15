@@ -1,4 +1,4 @@
-package com.example.jshop;
+package com.example.jshop.domain;
 
 import lombok.Data;
 
