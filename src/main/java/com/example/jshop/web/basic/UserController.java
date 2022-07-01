@@ -1,4 +1,4 @@
-package com.example.jshop;
+package com.example.jshop.web.basic;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
