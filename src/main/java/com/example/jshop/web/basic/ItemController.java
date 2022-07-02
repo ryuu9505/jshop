@@ -5,9 +5,7 @@ import com.example.jshop.domain.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -33,6 +31,27 @@ public class ItemController {
         return "item";
     }
 
+    @GetMapping("/add")
+    public String addForm() {
+        return "addForm";
+    }
+
+    @PostMapping("/add")
+    public String addItem(@RequestParam String itemName,
+                          @RequestParam int price,
+                          @RequestParam int quantity,
+                          Model model) {
+
+        Item item = new Item();
+        item.setItemName(itemName);
+        item.setPrice(price);
+        item.setQuantity(quantity);
+
+        Item savedItem = itemRepository.save(item);
+        model.addAttribute("item", savedItem);
+
+        return "item";
+    }
     /**
      * Data for Test
      */
