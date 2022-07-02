@@ -37,26 +37,17 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    public String addItem(@RequestParam String itemName,
-                          @RequestParam int price,
-                          @RequestParam int quantity,
-                          Model model) {
-
-        Item item = new Item();
-        item.setItemName(itemName);
-        item.setPrice(price);
-        item.setQuantity(quantity);
-
-        Item savedItem = itemRepository.save(item);
-        model.addAttribute("item", savedItem);
-
+    public String addForm(@ModelAttribute Item item, Model model){
+        itemRepository.save(item);
         return "item";
     }
+
     /**
      * Data for Test
      */
     @PostConstruct
     public void init() {
+
         itemRepository.save(new Item("testC", 11111, 10));
         itemRepository.save(new Item("testD", 22222, 20));
     }
