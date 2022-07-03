@@ -1,4 +1,4 @@
-package com.example.jshop.web.basic;
+package com.example.jshop.web;
 
 import com.example.jshop.domain.Item;
 import com.example.jshop.domain.ItemRepository;
