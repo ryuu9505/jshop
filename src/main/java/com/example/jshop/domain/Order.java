@@ -11,5 +11,9 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     // getter and setter
 }
