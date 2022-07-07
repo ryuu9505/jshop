@@ -53,8 +53,9 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String editItem(@PathVariable Long itemId, @ModelAttribute Item item) {
+    public String editItem(@PathVariable Long itemId, @ModelAttribute Item item, RedirectAttributes redirectAttributes) {
         itemRepository.update(itemId, item);
+        redirectAttributes.addAttribute("status", true);
         return "redirect:/items/{itemId}";
     }
 
@@ -63,8 +64,7 @@ public class ItemController {
      */
     @PostConstruct
     public void init() {
-
-        itemRepository.save(new Item("testC", 11111, 10));
-        itemRepository.save(new Item("testD", 22222, 20));
+        itemRepository.save(new Item("MacBook Pro", 2499, 10));
+        itemRepository.save(new Item("MacBook Air", 1499, 50));
     }
 }
