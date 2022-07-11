@@ -16,10 +16,12 @@ public class Member {
     @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-    private String username;
+    private String name;
 
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
+    @Embedded
+    private Address address;
 }

@@ -29,6 +29,5 @@ public class Item {
         this.quantity = quantity;
     }
 
-    @Embedded
-    private Address address;
+
 }
