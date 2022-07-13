@@ -1,4 +1,4 @@
-package com.example.jshop.domain;
+package com.example.jshop.repository;
 
 import com.example.jshop.domain.item.Item;
 import org.springframework.stereotype.Repository;

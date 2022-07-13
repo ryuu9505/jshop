@@ -1,6 +1,7 @@
 package com.example.jshop.domain;
 
 import com.example.jshop.domain.item.Item;
+import com.example.jshop.repository.ItemRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
