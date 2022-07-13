@@ -1,5 +1,7 @@
 package com.example.jshop.domain;
 
+import com.example.jshop.domain.item.Item;
+
 import javax.persistence.*;
 
 @Entity

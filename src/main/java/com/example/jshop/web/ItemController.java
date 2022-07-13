@@ -1,6 +1,6 @@
 package com.example.jshop.web;
 
-import com.example.jshop.domain.Item;
+import com.example.jshop.domain.item.Item;
 import com.example.jshop.domain.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

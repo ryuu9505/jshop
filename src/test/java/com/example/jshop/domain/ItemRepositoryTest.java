@@ -1,12 +1,11 @@
 package com.example.jshop.domain;
 
+import com.example.jshop.domain.item.Item;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ItemRepositoryTest {
 
@@ -72,7 +71,7 @@ class ItemRepositoryTest {
 
         //then
         Item foundItem = itemRepository.findById(savedItem.getId());
-        Assertions.assertThat(foundItem.getItemName()).isEqualTo(newItem.getItemName());
+        Assertions.assertThat(foundItem.getName()).isEqualTo(newItem.getName());
         Assertions.assertThat(foundItem.getPrice()).isEqualTo(newItem.getPrice());
         Assertions.assertThat(foundItem.getQuantity()).isEqualTo(newItem.getQuantity());
 
