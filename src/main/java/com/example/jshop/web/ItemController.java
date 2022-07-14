@@ -1,5 +1,6 @@
 package com.example.jshop.web;
 
+import com.example.jshop.domain.item.Book;
 import com.example.jshop.domain.item.Item;
 import com.example.jshop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -64,7 +65,15 @@ public class ItemController {
      */
     @PostConstruct
     public void init() {
-        itemRepository.save(new Item("MacBook Pro", 2499, 10));
-        itemRepository.save(new Item("MacBook Air", 1499, 50));
+        Item item1 = new Book();
+        item1.setName("MacBook Pro");
+        item1.setPrice(2499);
+        item1.setQuantity(10);
+        Item item2 = new Book();
+        item2.setName("MacBook Air");
+        item2.setPrice(1499);
+        item2.setQuantity(40);
+        itemRepository.save(item1);
+        itemRepository.save(item2);
     }
 }
