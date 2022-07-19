@@ -1,5 +1,6 @@
 package com.example.jshop.domain.item;
 
+import com.example.jshop.exception.NotEnoughStockException;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,18 @@ public abstract class Item {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public void addStock(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public void removeStock(int quantity) {
+        if (this.quantity < quantity) {
+            throw new NotEnoughStockException("NotEnoughStockException");
+        }
+
+        this.quantity -= quantity;
     }
 
 }
