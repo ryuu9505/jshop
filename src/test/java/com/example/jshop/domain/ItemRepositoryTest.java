@@ -6,17 +6,18 @@ import com.example.jshop.repository.ItemRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@SpringBootTest
+@Transactional
 class ItemRepositoryTest {
 
-    ItemRepository itemRepository = new ItemRepository();
-
-    @AfterEach
-    void afterEach() {
-        itemRepository.clearStore();
-    }
+    @Autowired
+    ItemRepository itemRepository;
 
     @Test
     void save() {
@@ -27,11 +28,11 @@ class ItemRepositoryTest {
         item.setQuantity(10);
 
         //when
-        Item SavedItem = itemRepository.save(item);
+        itemRepository.save(item);
 
         //then
         Item foundItem = itemRepository.findById(item.getId());
-        Assertions.assertThat(foundItem).isEqualTo(SavedItem);
+        Assertions.assertThat(foundItem).isEqualTo(item);
     }
 
     @Test
@@ -41,13 +42,13 @@ class ItemRepositoryTest {
         item.setName("MacBook Pro");
         item.setPrice(2499);
         item.setQuantity(10);
-        Item savedItem = itemRepository.save(item);
+        itemRepository.save(item);
 
         //when
         Item foundItem = itemRepository.findById(item.getId());
 
         //then
-        Assertions.assertThat(foundItem).isEqualTo(savedItem);
+        Assertions.assertThat(foundItem).isEqualTo(item);
     }
 
     @Test
@@ -61,8 +62,8 @@ class ItemRepositoryTest {
         item2.setName("MacBook Air");
         item2.setPrice(1499);
         item2.setQuantity(40);
-        Item SavedItem1 = itemRepository.save(item1);
-        Item SavedItem2 = itemRepository.save(item2);
+        itemRepository.save(item1);
+        itemRepository.save(item2);
 
         //when
         List<Item> items = itemRepository.findAll();
@@ -80,7 +81,7 @@ class ItemRepositoryTest {
         item.setName("MacBook Pro");
         item.setPrice(2499);
         item.setQuantity(10);
-        Item savedItem = itemRepository.save(item);
+        itemRepository.save(item);
 
         Item newItem = new Book();
         newItem.setName("MacBook Air");
@@ -91,7 +92,7 @@ class ItemRepositoryTest {
         itemRepository.update(item.getId(), newItem);
 
         //then
-        Item foundItem = itemRepository.findById(savedItem.getId());
+        Item foundItem = itemRepository.findById(item.getId());
         Assertions.assertThat(foundItem.getName()).isEqualTo(newItem.getName());
         Assertions.assertThat(foundItem.getPrice()).isEqualTo(newItem.getPrice());
         Assertions.assertThat(foundItem.getQuantity()).isEqualTo(newItem.getQuantity());

@@ -1,31 +1,36 @@
 package com.example.jshop.repository;
 
 import com.example.jshop.domain.item.Item;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Repository
+@RequiredArgsConstructor
 public class ItemRepository {
 
-    private static final Map<Long, Item> store = new HashMap<>(); //static 사용
-    private static long sequence = 0L; //static 사용
+    private final EntityManager em;
 
-    public Item save(Item item) {
-        item.setId(++sequence);
-        store.put(item.getId(), item);
-        return item;
+    public void save(Item item) {
+        if (item.getId() == null){ // new item
+            em.persist(item); // create
+        } else {
+            em.merge(item); // update
+        }
     }
 
     public Item findById(Long id) {
-        return store.get(id);
+        return em.find(Item.class, id);
     }
 
     public List<Item> findAll() {
-        return new ArrayList<>(store.values());
+        return em.createQuery("select i from Item i", Item.class).getResultList();
     }
 
     public void update(Long itemId, Item updateParam) {
@@ -35,7 +40,4 @@ public class ItemRepository {
         findItem.setQuantity(updateParam.getQuantity());
     }
 
-    public void clearStore() {
-        store.clear();
-    }
 }

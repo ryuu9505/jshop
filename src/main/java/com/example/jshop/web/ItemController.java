@@ -3,6 +3,7 @@ package com.example.jshop.web;
 import com.example.jshop.domain.item.Book;
 import com.example.jshop.domain.item.Item;
 import com.example.jshop.repository.ItemRepository;
+import com.example.jshop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemController {
 
-    private final ItemRepository itemRepository;
-
+    private final ItemService itemService;
+/*
     @GetMapping
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
@@ -40,8 +41,8 @@ public class ItemController {
 
     @PostMapping("/add")
     public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
-        Item savedItem = itemRepository.save(item);
-        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", item.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/items/{itemId}";
     }
@@ -58,12 +59,13 @@ public class ItemController {
         itemRepository.update(itemId, item);
         redirectAttributes.addAttribute("status", true);
         return "redirect:/items/{itemId}";
-    }
+    }/*
+
 
     /**
      * Data for Test
      */
-    @PostConstruct
+/*    @PostConstruct
     public void init() {
         Item item1 = new Book();
         item1.setName("MacBook Pro");
@@ -73,7 +75,7 @@ public class ItemController {
         item2.setName("MacBook Air");
         item2.setPrice(1499);
         item2.setQuantity(40);
-        itemRepository.save(item1);
-        itemRepository.save(item2);
-    }
+        itemService.save(item1);
+        itemService.save(item2);
+    }*/
 }
