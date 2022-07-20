@@ -58,10 +58,12 @@ class ItemRepositoryTest {
         item1.setName("MacBook Pro");
         item1.setPrice(2499);
         item1.setQuantity(10);
+
         Item item2 = new Book();
         item2.setName("MacBook Air");
         item2.setPrice(1499);
         item2.setQuantity(40);
+
         itemRepository.save(item1);
         itemRepository.save(item2);
 
