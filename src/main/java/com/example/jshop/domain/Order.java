@@ -49,7 +49,7 @@ public class Order {
         delivery.setOrder(this);
     }
 
-    // 생성 메서드
+    // 생성 메서드 //
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
         Order order = new Order();
         order.setMember(member);
@@ -61,5 +61,29 @@ public class Order {
         order.setOrderDate(LocalDateTime.now());
         return order;
     }
+
+    // Business Logics //
+    public void cancel() {
+
+        // exception;
+        if (delivery.getStatus() == DeliveryStatus.COMP) {
+            throw new IllegalStateException("배송이 완료된 상품은 취소할 수 없습니다."); // [?]EN
+        }
+
+        this.setStatus(OrderStatus.CANCEL);
+
+        // restore the quantity of items to original state // [?]EN
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
+
+    // 조회 Logics // [?]EN
+    public int getTotalPrice() {
+        return orderItems.stream()
+                .mapToInt(OrderItem::getTotalPrice)
+                .sum();
+    }
+
 
 }
