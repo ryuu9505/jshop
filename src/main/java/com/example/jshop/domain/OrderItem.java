@@ -25,7 +25,7 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    // 생성 메서드 //
+    // 생성 메서드
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
